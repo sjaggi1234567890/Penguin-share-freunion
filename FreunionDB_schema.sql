@@ -4,15 +4,18 @@ after entering to sqlite3 cli interface type the following command:     .read Fr
 
 */
 
+
+
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-CREATE TABLE users(
+CREATE TABLE IF not EXISTS users(
 UUID INT PRIMARY KEY NOT NULL,
 username TEXT NOT NULL UNIQUE,
 mobile INT NOT NULL,
-email CHAR(254) CHECK(email LIKE '%@%.%')
+email CHAR(254) CHECK(email LIKE '%@%.%'),
+  password CHAR(50)
 );
-CREATE TABLE users_files(
+CREATE TABLE IF NOT EXISTS users_files(
 file_UUID INT PRIMARY KEY NOT NULL,
 file_name TEXT NOT NULL,
 file_size INT,
@@ -24,7 +27,7 @@ FOREIGN KEY(file_owner) REFERENCES users(username),
 
 FOREIGN Key( owner_uuid) REFERENCES users(UUID)
 );
-CREATE TABLE shared_files(
+CREATE TABLE IF NOT EXISTS shared_files(
 shared_file_UUID INT,
 file_sender INT,
 file_reciever INTEGER,
