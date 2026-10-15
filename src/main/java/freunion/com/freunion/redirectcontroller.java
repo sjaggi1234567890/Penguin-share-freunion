@@ -18,7 +18,7 @@ public String index(){
 @GetMapping("/login")
 
 
-    public String login() {
+    public String login(){
         return "login";
     }
 
@@ -26,7 +26,7 @@ public String index(){
 
 @GetMapping("/register")
 
-    public String register() {
+    public String register(){
         return "register";
     }
 
